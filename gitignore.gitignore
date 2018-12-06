@@ -1,0 +1,5 @@
+#do not track these files
+node modules
+.DS_Store
+.env
+
