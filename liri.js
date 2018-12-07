@@ -35,6 +35,7 @@ switch (liriReturn) {
     case "movie-this":
     movieThis();
     break;
+
     case "do-what-it-says":
     doWhatItSays();
     break;
@@ -49,11 +50,11 @@ switch (liriReturn) {
 
 //COMMAND 1 CONCERT THIS
 function concertThis(){
-    var bandSearch = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-    request(bandSearch, function(error, response, body){
+    var queryUrl = "https://rest.bandsintown.com/artists/" + artistname + "/events?app_id=3968800d824fec9c6cca964dcda1b424";
+    request(queryUrl, function(error, response, body){
         console.log(JSON.parse(body))
 
-        request(bandSearch, function (error, response, body) {
+        request(queryUrl, function (error, response, body) {
             if (error) console.log(error);
             var result  =  JSON.parse(body)[0];
             console.log("Venue name " + result.venue.name);
@@ -87,7 +88,7 @@ function spotifyThisSong(trackName) {
                             "Album: " + trackInfo[i].album.name + "\n"
 
                         console.log(spotifyResults);
-                        console.log(' ');
+                        console.log("  ");
                     };
                 };
             } else {
@@ -104,11 +105,8 @@ function movieThis() {
     var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
     request(queryUrl, function (error, response, body) {
-
-        
         if (!error && response.statusCode === 200) {
 
-            
             var myMovieData = JSON.parse(body);
             var queryUrlResults =
                 "Title: " + myMovieData.Title + "\n" +
@@ -132,7 +130,7 @@ function movieThis() {
 //COMMAND 4 DO WHAT IT SAYS
 function doWhatItSays() {
 
-    fs.writeFile("random.txt", 'spotify-this-song,"Human Nature"', function (err) {
+    fs.writeFile("random.txt", "spotify-this-song,'Human Nature'", function (err) {
         var song = "spotify-this-song 'Human Nature'"
     
         if (err) {
